@@ -1,0 +1,460 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalyankar Quiz Maker</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f6f9;
+}
+
+header{
+background:#007bff;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+width:90%;
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+margin:15px 0;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+input,textarea,select{
+width:100%;
+padding:10px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+background:#007bff;
+color:white;
+border:none;
+padding:10px 15px;
+margin-top:10px;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0056b3;
+}
+
+.quiz-item{
+padding:10px;
+border-bottom:1px solid #ddd;
+}
+
+.option{
+display:block;
+margin:8px 0;
+}
+
+#quizSection,
+#createQuizSection,
+#resultSection{
+display:none;
+}
+
+@media(max-width:600px){
+.container{
+width:95%;
+}
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Kalyankar Online Quiz Maker</h1>
+<p>Create and Take Quizzes Easily</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>User Registration / Login</h2>
+
+<input type="text" id="username" placeholder="Enter Username">
+
+<button onclick="login()">
+Login
+</button>
+
+<p id="welcome"></p>
+</div>
+
+<div class="card">
+<h2>Home Page</h2>
+
+<button onclick="showCreateQuiz()">
+Create Quiz
+</button>
+
+<button onclick="showQuizList()">
+Take Quiz
+</button>
+</div>
+
+<div class="card" id="createQuizSection">
+
+<h2>Create Quiz</h2>
+
+<input type="text"
+id="quizTitle"
+placeholder="Quiz Title">
+
+<input type="text"
+id="question"
+placeholder="Question">
+
+<input type="text"
+id="opt1"
+placeholder="Option 1">
+
+<input type="text"
+id="opt2"
+placeholder="Option 2">
+
+<input type="text"
+id="opt3"
+placeholder="Option 3">
+
+<input type="text"
+id="opt4"
+placeholder="Option 4">
+
+<select id="correct">
+<option value="0">Correct Option 1</option>
+<option value="1">Correct Option 2</option>
+<option value="2">Correct Option 3</option>
+<option value="3">Correct Option 4</option>
+</select>
+
+<button onclick="saveQuiz()">
+Save Quiz
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Available Quizzes</h2>
+
+<div id="quizList"></div>
+
+</div>
+
+<div class="card" id="quizSection">
+
+<h2 id="quizName"></h2>
+
+<div id="questionArea"></div>
+
+<button onclick="nextQuestion()">
+Next
+</button>
+
+</div>
+
+<div class="card" id="resultSection">
+
+<h2>Quiz Result</h2>
+
+<h3 id="score"></h3>
+
+<div id="answers"></div>
+
+</div>
+
+</div>
+
+<script>
+
+let currentUser="";
+let quizzes=
+JSON.parse(localStorage.getItem("quizzes"))
+||[];
+
+let currentQuiz;
+let currentQuestion=0;
+let score=0;
+let userAnswers=[];
+
+function login(){
+
+let username=
+document.getElementById("username").value;
+
+if(username===""){
+alert("Enter Username");
+return;
+}
+
+currentUser=username;
+
+localStorage.setItem(
+"user",
+username
+);
+
+document.getElementById(
+"welcome"
+).innerHTML=
+"Welcome "+username;
+}
+
+function showCreateQuiz(){
+
+document.getElementById(
+"createQuizSection"
+).style.display="block";
+}
+
+function saveQuiz(){
+
+let quiz={
+title:
+document.getElementById(
+"quizTitle"
+).value,
+
+questions:[
+{
+question:
+document.getElementById(
+"question"
+).value,
+
+options:[
+opt1.value,
+opt2.value,
+opt3.value,
+opt4.value
+],
+
+correct:
+parseInt(correct.value)
+}
+]
+};
+
+quizzes.push(quiz);
+
+localStorage.setItem(
+"quizzes",
+JSON.stringify(quizzes)
+);
+
+alert("Quiz Saved");
+
+showQuizList();
+}
+
+function showQuizList(){
+
+let list=
+document.getElementById(
+"quizList"
+);
+
+list.innerHTML="";
+
+quizzes.forEach((quiz,index)=>{
+
+list.innerHTML+=`
+
+<div class="quiz-item">
+
+<b>${quiz.title}</b>
+
+<br>
+
+<button onclick=
+"startQuiz(${index})">
+
+Take Quiz
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+function startQuiz(index){
+
+currentQuiz=quizzes[index];
+
+currentQuestion=0;
+score=0;
+userAnswers=[];
+
+document.getElementById(
+"quizSection"
+).style.display="block";
+
+document.getElementById(
+"resultSection"
+).style.display="none";
+
+showQuestion();
+}
+
+function showQuestion(){
+
+let q=
+currentQuiz.questions[
+currentQuestion
+];
+
+document.getElementById(
+"quizName"
+).innerHTML=
+currentQuiz.title;
+
+let html=
+`<h3>${q.question}</h3>`;
+
+q.options.forEach(
+(option,i)=>{
+
+html+=`
+
+<label class="option">
+
+<input type="radio"
+name="answer"
+value="${i}">
+
+${option}
+
+</label>
+
+`;
+
+});
+
+document.getElementById(
+"questionArea"
+).innerHTML=
+html;
+}
+
+function nextQuestion(){
+
+let selected=
+document.querySelector(
+'input[name="answer"]:checked'
+);
+
+if(!selected){
+
+alert("Select Answer");
+return;
+}
+
+let answer=
+parseInt(selected.value);
+
+userAnswers.push(answer);
+
+if(
+answer===
+currentQuiz.questions[
+currentQuestion
+].correct
+){
+score++;
+}
+
+currentQuestion++;
+
+if(
+currentQuestion<
+currentQuiz.questions.length
+){
+showQuestion();
+}
+else{
+showResult();
+}
+}
+
+function showResult(){
+
+document.getElementById(
+"quizSection"
+).style.display="none";
+
+document.getElementById(
+"resultSection"
+).style.display="block";
+
+document.getElementById(
+"score"
+).innerHTML=
+
+"Your Score : "+score+
+"/"+
+currentQuiz.questions.length;
+
+let result="";
+
+currentQuiz.questions.forEach(
+(q,index)=>{
+
+result+=`
+
+<p>
+
+<b>${q.question}</b>
+
+<br>
+
+Correct Answer:
+${q.options[q.correct]}
+
+</p>
+
+`;
+
+});
+
+document.getElementById(
+"answers"
+).innerHTML=result;
+}
+
+showQuizList();
+
+</script>
+
+</body>
+</html>
+```
