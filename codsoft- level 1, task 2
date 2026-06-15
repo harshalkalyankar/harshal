@@ -1,217 +1,77 @@
-```html
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kalyankar Technologies</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
-
 body{
-    background:#f5f7fa;
+    font-family: Arial;
+    margin: 0;
+    background-color: #f2f2f2;
 }
 
-/* Header */
 header{
-    background:#0f172a;
-    color:white;
-    padding:15px 8%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo-container{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.logo{
-    width:45px;
-    height:45px;
-    border-radius:50%;
-    background:#38bdf8;
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:24px;
-    font-weight:bold;
-}
-
-.company-name{
-    font-size:24px;
-    font-weight:bold;
-}
-
-nav a{
-    color:white;
-    text-decoration:none;
-    margin-left:20px;
-}
-
-nav a:hover{
-    color:#38bdf8;
-}
-
-/* Hero Section */
-.hero{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:80px 10%;
-    background:linear-gradient(to right,#0f172a,#1e293b);
-    color:white;
-}
-
-.hero-text{
-    width:50%;
-}
-
-.hero-text h1{
-    font-size:50px;
-    margin-bottom:15px;
-}
-
-.hero-text p{
-    margin-bottom:20px;
-    line-height:1.7;
-}
-
-.btn{
-    background:#38bdf8;
-    color:black;
-    text-decoration:none;
-    padding:12px 25px;
-    border-radius:25px;
-    font-weight:bold;
-}
-
-.btn:hover{
-    background:white;
-}
-
-.hero-image{
-    width:40%;
-    text-align:center;
-}
-
-.hero-image img{
-    width:100%;
-    max-width:350px;
-}
-
-/* Sections */
-section{
-    padding:70px 10%;
-}
-
-.title{
-    text-align:center;
-    font-size:35px;
-    margin-bottom:40px;
-    color:#0f172a;
-}
-
-/* Services */
-.services{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:25px;
-}
-
-.card{
-    background:white;
-    padding:25px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
-    text-align:center;
-}
-
-.card h3{
-    margin-bottom:10px;
-    color:#0f172a;
-}
-
-/* About */
-.about{
-    background:#e2e8f0;
-    text-align:center;
-    line-height:1.8;
-}
-
-/* Contact */
-.contact{
-    text-align:center;
-}
-
-.contact input,
-.contact textarea{
-    width:80%;
-    padding:12px;
-    margin:10px 0;
-    border:1px solid #ccc;
-    border-radius:5px;
-}
-
-.contact button{
-    padding:12px 25px;
-    border:none;
-    background:#38bdf8;
-    font-weight:bold;
-    cursor:pointer;
-    border-radius:5px;
-}
-
-/* Footer */
-footer{
-    background:#0f172a;
-    color:white;
-    text-align:center;
-    padding:20px;
-}
-
-/* Mobile */
-@media(max-width:768px){
-
-.hero{
-    flex-direction:column;
-    text-align:center;
-}
-
-.hero-text,
-.hero-image{
-    width:100%;
-}
-
-.hero-text h1{
-    font-size:35px;
+    background-color: navy;
+    color: white;
+    text-align: center;
+    padding: 20px;
 }
 
 nav{
-    display:none;
+    background-color: lightblue;
+    text-align: center;
+    padding: 10px;
 }
+
+nav a{
+    text-decoration: none;
+    margin: 15px;
+    color: black;
+}
+
+section{
+    background-color: white;
+    margin: 15px;
+    padding: 15px;
+    border: 1px solid gray;
+}
+
+h2{
+    color: navy;
+}
+
+.service{
+    border: 1px solid lightgray;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+input, textarea{
+    width: 300px;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+button{
+    padding: 10px;
+    margin-top: 10px;
+}
+
+footer{
+    background-color: navy;
+    color: white;
+    text-align: center;
+    padding: 15px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- Header -->
 <header>
-
-<div class="logo-container">
-    <div class="logo">K</div>
-    <div class="company-name">Kalyankar Technologies</div>
-</div>
+    <h1>Kalyankar Technologies</h1>
+    <p>Simple Software and Web Solutions</p>
+</header>
 
 <nav>
     <a href="#home">Home</a>
@@ -220,91 +80,72 @@ nav{
     <a href="#contact">Contact</a>
 </nav>
 
-</header>
-
-<!-- Hero Section -->
-<section class="hero" id="home">
-
-<div class="hero-text">
-    <h1>Building Smart Digital Solutions</h1>
+<section id="home">
+    <h2>Welcome</h2>
 
     <p>
-        Kalyankar Technologies helps businesses grow through
-        innovative web development, software solutions,
-        AI-powered applications and modern digital experiences.
+        Welcome to Kalyankar Technologies.
+        We provide software development and website development services.
     </p>
-
-    <a href="#services" class="btn">Get Started</a>
-</div>
-
-<div class="hero-image">
-    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Technology">
-</div>
-
 </section>
 
-<!-- Services -->
 <section id="services">
+    <h2>Services</h2>
 
-<h2 class="title">Our Services</h2>
+    <div class="service">
+        <h3>Website Development</h3>
+        <p>Creating simple websites using HTML, CSS and JavaScript.</p>
+    </div>
 
-<div class="services">
+    <div class="service">
+        <h3>Software Development</h3>
+        <p>Developing software projects for students and businesses.</p>
+    </div>
 
-<div class="card">
-    <h3>Web Development</h3>
-    <p>Create responsive and attractive websites for businesses and startups.</p>
-</div>
-
-<div class="card">
-    <h3>Software Development</h3>
-    <p>Custom software solutions designed to improve productivity and efficiency.</p>
-</div>
-
-<div class="card">
-    <h3>AI Solutions</h3>
-    <p>Smart AI-based applications for automation and decision-making.</p>
-</div>
-
-</div>
-
+    <div class="service">
+        <h3>AI Projects</h3>
+        <p>Basic AI and machine learning project development.</p>
+    </div>
 </section>
 
-<!-- About -->
-<section class="about" id="about">
+<section id="about">
+    <h2>About Us</h2>
 
-<h2 class="title">About Us</h2>
-
-<p>
-Kalyankar Technologies is a technology company focused on delivering
-modern digital solutions. Our mission is to provide innovative,
-user-friendly, and efficient software products that help businesses
-succeed in the digital world.
-</p>
-
+    <p>
+        Kalyankar Technologies is a student project company website.
+        The purpose of this project is to demonstrate HTML, CSS and JavaScript concepts.
+    </p>
 </section>
 
-<!-- Contact -->
-<section class="contact" id="contact">
+<section id="contact">
+    <h2>Contact Us</h2>
 
-<h2 class="title">Contact Us</h2>
+    <form onsubmit="showMessage(); return false;">
 
-<form>
-<input type="text" placeholder="Enter Your Name" required><br>
+        <input type="text" placeholder="Enter Name" required>
+        <br><br>
 
-<input type="email" placeholder="Enter Your Email" required><br>
+        <input type="email" placeholder="Enter Email" required>
+        <br><br>
 
-<textarea rows="5" placeholder="Enter Your Message"></textarea><br>
+        <textarea rows="4" placeholder="Enter Message"></textarea>
+        <br><br>
 
-<button type="submit">Send Message</button>
-</form>
+        <button type="submit">Send</button>
 
+    </form>
 </section>
 
-<!-- Footer -->
 <footer>
-    <p>© 2026 Kalyankar Technologies | All Rights Reserved</p>
+    <p>© 2026 Kalyankar Technologies</p>
 </footer>
+
+<script>
+function showMessage()
+{
+    alert("Message Sent Successfully");
+}
+</script>
 
 </body>
 </html>
-```
